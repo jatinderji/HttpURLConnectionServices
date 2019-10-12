@@ -74,9 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 // Maintain http url connection.
                 HttpURLConnection httpConn = null;
 
-                // Read text input stream.
-                InputStreamReader isReader = null;
-
                 // Read text into buffer.
                 BufferedReader bufReader = null;
 
@@ -100,11 +97,8 @@ public class MainActivity extends AppCompatActivity {
                     // Get input stream from web url connection.
                     InputStream inputStream = httpConn.getInputStream();
 
-                    // Create input stream reader based on url connection input stream.
-                    isReader = new InputStreamReader(inputStream);
-
                     // Create buffered reader.
-                    bufReader = new BufferedReader(isReader);
+                    bufReader = new BufferedReader(new InputStreamReader(inputStream));
 
                     // Read line of text from server response.
                     String line = bufReader.readLine();
@@ -158,11 +152,6 @@ public class MainActivity extends AppCompatActivity {
                         if (bufReader != null) {
                             bufReader.close();
                         }
-
-                        if (isReader != null) {
-                            isReader.close();
-                        }
-
                         if (httpConn != null) {
                             httpConn.disconnect();
                         }
